@@ -12,7 +12,8 @@ public class EncryptServiceImplement implements EncryptService {
     }
 
     @Override
-    public boolean verifyPassword(String originalPassword, String hashPassword) {
-        return true;
+    public boolean verifyPassword(String originalPassword, String hashPassword, String salt) {
+        boolean verified = Password.check(originalPassword, hashPassword).addSalt(salt).withPBKDF2();
+        return verified;
     }
 }

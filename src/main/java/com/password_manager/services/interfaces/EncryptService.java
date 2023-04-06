@@ -17,5 +17,5 @@ public interface EncryptService {
      * @param username
      * @return
      */
-    boolean verifyPassword(String originalPassword, String hashPassword);
+    boolean verifyPassword(String originalPassword, String hashPassword, String salt);
 }
