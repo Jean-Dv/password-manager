@@ -1,7 +1,5 @@
 package com.password_manager.services.interfaces;
 
-import java.io.IOException;
-
 import org.json.JSONObject;
 import org.json.JSONArray;
 

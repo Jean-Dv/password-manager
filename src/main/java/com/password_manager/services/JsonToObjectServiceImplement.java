@@ -62,11 +62,8 @@ public class JsonToObjectServiceImplement implements JsonToObjectService {
 
     @Override
     public boolean saveObject(String key, JSONArray list) {
-        JSONObject json = this.getObject();
-
-        json.put(key, list);
         try (PrintWriter out = new PrintWriter(new FileWriter(this.path))) {
-            out.println(json.toString());
+            out.println(list.toString());
         } catch (Exception e) {
             System.out.println(e);
             return false;
