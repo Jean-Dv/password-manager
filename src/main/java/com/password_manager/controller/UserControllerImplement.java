@@ -63,4 +63,20 @@ public class UserControllerImplement implements UserController {
         EncryptServiceImplement encryptService = new EncryptServiceImplement();
         return encryptService.verifyPassword(password, hashPassword, salt);
     }
+
+    @Override
+    public void sortUsers() {
+        JSONArray users = this.getUsers();
+        for (int i = 0; i < users.length(); i++) {
+            for (int j = i + 1; j < users.length(); j++) {
+                JSONObject user1 = users.getJSONObject(i);
+                JSONObject user2 = users.getJSONObject(j);
+                if (user1.getString("username").compareTo(user2.getString("username")) > 0) {
+                    users.put(i, user2);
+                    users.put(j, user1);
+                }
+            }
+        }
+        this.jsonToObjectService.saveObject("users", users);
+    }
 }

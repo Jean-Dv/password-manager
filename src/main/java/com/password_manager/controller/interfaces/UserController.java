@@ -36,4 +36,10 @@ public interface UserController {
      * @return
      */
     boolean signIn(String username, String password);
+
+    /**
+     * Sorted the users by username.
+     * @return
+     */
+    void sortUsers();
 }
