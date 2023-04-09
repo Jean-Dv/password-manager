@@ -41,6 +41,12 @@ public class JsonToObjectServiceImplement implements JsonToObjectService {
     }
 
     @Override
+    public JSONArray getList() {
+        JSONArray list = new JSONArray(this.content);
+        return list;
+    }
+
+    @Override
     public boolean saveObject(String key, JSONObject obj) {
         JSONObject json = this.getObject();
 

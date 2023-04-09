@@ -7,11 +7,16 @@ import org.json.JSONArray;
 
 public interface JsonToObjectService {
     /**
-     * Return the users on the file in a JSONArray.
+     * Return the users on the file in a JSONObject.
      * @return 
-     * @throws IOException
      */
     JSONObject getObject();
+
+    /**
+     * Return the users on the file in a JSONArray.
+     * @return
+     */
+    JSONArray getList();
 
     /**
      * Save Json object on the file.

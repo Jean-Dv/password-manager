@@ -9,12 +9,11 @@ import com.password_manager.services.EncryptServiceImplement;
 import com.password_manager.services.JsonToObjectServiceImplement;
 
 public class UserControllerImplement implements UserController {
-    JsonToObjectServiceImplement jsonToObjectService = JsonToObjectServiceImplement.getInstance("./data.json");
+    JsonToObjectServiceImplement jsonToObjectService = JsonToObjectServiceImplement.getInstance("./db/users.json");
 
     @Override
     public JSONArray getUsers() {
-        JSONObject obj = this.jsonToObjectService.getObject();
-        JSONArray users = obj.getJSONArray("users");
+        JSONArray users = this.jsonToObjectService.getList();
         return users;
     }
 
