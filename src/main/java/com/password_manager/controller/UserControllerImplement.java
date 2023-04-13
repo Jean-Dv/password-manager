@@ -7,6 +7,7 @@ import com.password4j.Hash;
 import com.password_manager.controller.interfaces.UserController;
 import com.password_manager.services.EncryptServiceImplement;
 import com.password_manager.services.JsonToObjectServiceImplement;
+import com.password_manager.models.User;
 
 public class UserControllerImplement implements UserController {
     JsonToObjectServiceImplement jsonToObjectService = JsonToObjectServiceImplement.getInstance("./db/users.json");
@@ -24,10 +25,7 @@ public class UserControllerImplement implements UserController {
         String hashPassword = hash.getResult();
         String salt = hash.getSalt();
         JSONArray users = this.getUsers();
-        JSONObject newUser = new JSONObject();
-        newUser.put("username", username);
-        newUser.put("salt", salt);
-        newUser.put("hash", hashPassword);
+        User newUser = new User(username, hashPassword, salt);
         users.put(newUser);
         this.jsonToObjectService.saveObject("users", users);
     }
