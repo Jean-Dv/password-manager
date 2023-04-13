@@ -12,6 +12,9 @@ public class User extends JSONObject {
         this.username = username;
         this.hash = hash;
         this.salt = salt;
+        this.put("username", username);
+        this.put("hash", hash);
+        this.put("salt", salt);
     }
 
 
@@ -21,14 +24,16 @@ public class User extends JSONObject {
 
     public void setUsername(String username) {
         this.username = username;
+        this.put("username", username);
     }
 
     public String getHash() {
         return this.hash;
     }
 
-    public void setPassword(String hash) {
+    public void setHash(String hash) {
         this.hash = hash;
+        this.put("hash", hash);
     }
 
     public String getSalt() {
@@ -37,5 +42,6 @@ public class User extends JSONObject {
 
     public void setSalt(String salt) {
         this.salt = salt;
+        this.put("salt", salt);
     }
 }
