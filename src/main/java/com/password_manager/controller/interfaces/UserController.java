@@ -13,21 +13,7 @@ public interface UserController {
      * Save the user on the file.
      * @param user
      */
-    void saveUser(String username, String password);
-
-    /**
-     * Get hash password from the file.
-     * @param username
-     * @return
-     */
-    String getHashPassword(String username);
-
-    /**
-     * Get salt from the file.
-     * @param username
-     * @return
-     */
-    String getSalt(String username);
+    void createUser(String username, String password);
 
     /**
      * Sign in the user.
@@ -36,10 +22,4 @@ public interface UserController {
      * @return
      */
     boolean signIn(String username, String password);
-
-    /**
-     * Sorted the users by username.
-     * @return
-     */
-    void sortUsers();
 }

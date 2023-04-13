@@ -18,7 +18,7 @@ public class UserControllerImplement implements UserController {
     }
 
     @Override
-    public void saveUser(String username, String password) {
+    public void createUser(String username, String password) {
         EncryptServiceImplement encryptService = new EncryptServiceImplement();
         Hash hash = encryptService.encryptPassword(password);
         String hashPassword = hash.getResult();
@@ -32,7 +32,6 @@ public class UserControllerImplement implements UserController {
         this.jsonToObjectService.saveObject("users", users);
     }
 
-    @Override
     public String getHashPassword(String username) {
         JSONArray users = this.getUsers();
         for (int i = 0; i < users.length(); i++) {
@@ -44,7 +43,6 @@ public class UserControllerImplement implements UserController {
         return "User not found";
     }
 
-    @Override
     public String getSalt(String username) {
         JSONArray users = this.getUsers();
         for (int i = 0; i < users.length(); i++) {
@@ -56,7 +54,6 @@ public class UserControllerImplement implements UserController {
         return "User not found";
     }
 
-    @Override
     public boolean signIn(String username, String password) {
         String hashPassword = this.getHashPassword(username);
         String salt = this.getSalt(username);
@@ -64,7 +61,6 @@ public class UserControllerImplement implements UserController {
         return encryptService.verifyPassword(password, hashPassword, salt);
     }
 
-    @Override
     public void sortUsers() {
         JSONArray users = this.getUsers();
         for (int i = 0; i < users.length(); i++) {
