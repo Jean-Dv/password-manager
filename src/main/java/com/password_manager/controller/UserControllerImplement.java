@@ -74,13 +74,13 @@ public class UserControllerImplement implements UserController {
         this.jsonToObjectService.saveObject("users", users);
     }
 
-    private int search(String[] arr, String x) {
+    private int search(JSONArray arr, String x) {
         int left = 0;
-        int right = arr.length - 1;
+        int right = arr.length() - 1;
 
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            int result = x.compareTo(arr[mid]);
+            int result = x.compareTo(arr.getJSONObject(mid).getString("username"));
             if (result == 0) {
                 return mid;
             } else if (result > 0) {
@@ -94,13 +94,8 @@ public class UserControllerImplement implements UserController {
 
     @Override
     public User getUser(String username) {
-        String[] usernames= new String[this.getUsers().length()];
         JSONArray users = this.getUsers();
-        for (int i = 0; i < users.length(); i++) {
-            JSONObject user = users.getJSONObject(i);
-            usernames[i] = user.get("username").toString();
-        }
-        int index = this.search(usernames, username);
+        int index = this.search(users, username);
         if (index != -1) {
             JSONObject user = users.getJSONObject(index);
             return new User(user.getString("username"), user.getString("hash"), user.getString("salt"));
