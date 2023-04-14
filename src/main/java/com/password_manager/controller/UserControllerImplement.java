@@ -30,31 +30,10 @@ public class UserControllerImplement implements UserController {
         this.jsonToObjectService.saveObject("users", users);
     }
 
-    public String getHashPassword(String username) {
-        JSONArray users = this.getUsers();
-        for (int i = 0; i < users.length(); i++) {
-            JSONObject user = users.getJSONObject(i);
-            if (user.getString("username").equals(username)) {
-                return user.getString("hash");
-            }
-        }
-        return "User not found";
-    }
-
-    public String getSalt(String username) {
-        JSONArray users = this.getUsers();
-        for (int i = 0; i < users.length(); i++) {
-            JSONObject user = users.getJSONObject(i);
-            if (user.getString("username").equals(username)) {
-                return user.getString("salt");
-            }
-        }
-        return "User not found";
-    }
-
     public boolean signIn(String username, String password) {
-        String hashPassword = this.getHashPassword(username);
-        String salt = this.getSalt(username);
+        User user = this.getUser(username);
+        String hashPassword = user.getHash();
+        String salt = user.getSalt();
         EncryptServiceImplement encryptService = new EncryptServiceImplement();
         return encryptService.verifyPassword(password, hashPassword, salt);
     }
