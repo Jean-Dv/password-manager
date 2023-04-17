@@ -3,7 +3,7 @@ package com.password_manager.services.interfaces;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public interface JsonToObjectService {
+public interface JSONService {
     /**
      * Return the users on the file in a JSONObject.
      * @return 

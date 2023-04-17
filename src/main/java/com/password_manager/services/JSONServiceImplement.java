@@ -1,6 +1,6 @@
 package com.password_manager.services;
 
-import com.password_manager.services.interfaces.JsonToObjectService;
+import com.password_manager.services.interfaces.JSONService;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,12 +11,12 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class JsonToObjectServiceImplement implements JsonToObjectService {
+public class JSONServiceImplement implements JSONService {
 
     private String content;
     private String path;
 
-    public JsonToObjectServiceImplement(String path) {
+    public JSONServiceImplement(String path) {
         File file = new File(path);
         try {
             this.path = path;

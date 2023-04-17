@@ -6,21 +6,21 @@ import org.json.JSONObject;
 import com.password4j.Hash;
 import com.password_manager.controller.interfaces.UserController;
 import com.password_manager.services.EncryptServiceImplement;
-import com.password_manager.services.JsonToObjectServiceImplement;
+import com.password_manager.services.JSONServiceImplement;
 import com.password_manager.models.User;
 
 public class UserControllerImplement implements UserController {
 
     @Override
     public JSONArray getUsers() {
-        JsonToObjectServiceImplement jsonToObjectService = new JsonToObjectServiceImplement("./db/users.json");
+        JSONServiceImplement jsonToObjectService = new JSONServiceImplement("./db/users.json");
         JSONArray users = jsonToObjectService.getList();
         return users;
     }
 
     @Override
     public void createUser(String username, String password) {
-        JsonToObjectServiceImplement jsonToObjectService = new JsonToObjectServiceImplement("./db/users.json");
+        JSONServiceImplement jsonToObjectService = new JSONServiceImplement("./db/users.json");
         EncryptServiceImplement encryptService = new EncryptServiceImplement();
         Hash hash = encryptService.encryptPassword(password);
         String hashPassword = hash.getResult();
@@ -40,7 +40,7 @@ public class UserControllerImplement implements UserController {
     }
 
     public void sortUsers() {
-        JsonToObjectServiceImplement jsonToObjectService = new JsonToObjectServiceImplement("./db/users.json");
+        JSONServiceImplement jsonToObjectService = new JSONServiceImplement("./db/users.json");
         JSONArray users = this.getUsers();
         for (int i = 0; i < users.length(); i++) {
             for (int j = i + 1; j < users.length(); j++) {
