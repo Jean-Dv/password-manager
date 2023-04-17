@@ -10,16 +10,17 @@ import com.password_manager.services.JsonToObjectServiceImplement;
 import com.password_manager.models.User;
 
 public class UserControllerImplement implements UserController {
-    JsonToObjectServiceImplement jsonToObjectService = JsonToObjectServiceImplement.getInstance("./db/users.json");
 
     @Override
     public JSONArray getUsers() {
-        JSONArray users = this.jsonToObjectService.getList();
+        JsonToObjectServiceImplement jsonToObjectService = new JsonToObjectServiceImplement("./db/users.json");
+        JSONArray users = jsonToObjectService.getList();
         return users;
     }
 
     @Override
     public void createUser(String username, String password) {
+        JsonToObjectServiceImplement jsonToObjectService = new JsonToObjectServiceImplement("./db/users.json");
         EncryptServiceImplement encryptService = new EncryptServiceImplement();
         Hash hash = encryptService.encryptPassword(password);
         String hashPassword = hash.getResult();
@@ -27,7 +28,7 @@ public class UserControllerImplement implements UserController {
         JSONArray users = this.getUsers();
         User newUser = new User(username, hashPassword, salt);
         users.put(newUser);
-        this.jsonToObjectService.saveObject("users", users);
+        jsonToObjectService.saveObject(users);
     }
 
     public boolean signIn(String username, String password) {
@@ -39,6 +40,7 @@ public class UserControllerImplement implements UserController {
     }
 
     public void sortUsers() {
+        JsonToObjectServiceImplement jsonToObjectService = new JsonToObjectServiceImplement("./db/users.json");
         JSONArray users = this.getUsers();
         for (int i = 0; i < users.length(); i++) {
             for (int j = i + 1; j < users.length(); j++) {
@@ -50,7 +52,7 @@ public class UserControllerImplement implements UserController {
                 }
             }
         }
-        this.jsonToObjectService.saveObject("users", users);
+        jsonToObjectService.saveObject(users);
     }
 
     private int search(JSONArray arr, String x) {

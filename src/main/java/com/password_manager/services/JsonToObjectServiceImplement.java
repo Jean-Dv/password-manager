@@ -13,11 +13,10 @@ import org.json.JSONObject;
 
 public class JsonToObjectServiceImplement implements JsonToObjectService {
 
-    private static JsonToObjectServiceImplement _instance;
     private String content;
     private String path;
 
-    private JsonToObjectServiceImplement(String path) {
+    public JsonToObjectServiceImplement(String path) {
         File file = new File(path);
         try {
             this.path = path;
@@ -25,13 +24,6 @@ public class JsonToObjectServiceImplement implements JsonToObjectService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static JsonToObjectServiceImplement getInstance(String nameFile) {
-        if (_instance == null) {
-            _instance = new JsonToObjectServiceImplement(nameFile);
-        }
-        return _instance;
     }
 
     @Override
@@ -61,7 +53,7 @@ public class JsonToObjectServiceImplement implements JsonToObjectService {
     }
 
     @Override
-    public boolean saveObject(String key, JSONArray list) {
+    public boolean saveObject(JSONArray list) {
         try (PrintWriter out = new PrintWriter(new FileWriter(this.path))) {
             out.println(list.toString());
         } catch (Exception e) {

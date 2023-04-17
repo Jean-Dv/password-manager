@@ -24,5 +24,5 @@ public interface JsonToObjectService {
      * @return
      */
     boolean saveObject(String key, JSONObject obj);
-    boolean saveObject(String key, JSONArray list);
+    boolean saveObject(JSONArray list);
 }
