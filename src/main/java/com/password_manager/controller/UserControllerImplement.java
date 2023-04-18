@@ -5,11 +5,17 @@ import org.json.JSONObject;
 
 import com.password4j.Hash;
 import com.password_manager.controller.interfaces.UserController;
+import com.password_manager.services.DirectoryServiceImplement;
 import com.password_manager.services.EncryptServiceImplement;
 import com.password_manager.services.JSONServiceImplement;
 import com.password_manager.models.User;
 
 public class UserControllerImplement implements UserController {
+
+    public void createDirectoryPersonal(String username) {
+        DirectoryServiceImplement directoryService = new DirectoryServiceImplement();
+        directoryService.writeFile(username);
+    }
 
     @Override
     public JSONArray getUsers() {
@@ -29,6 +35,7 @@ public class UserControllerImplement implements UserController {
         User newUser = new User(username, hashPassword, salt);
         users.put(newUser);
         jsonToObjectService.saveObject(users);
+        this.createDirectoryPersonal(username);
     }
 
     public boolean signIn(String username, String password) {
