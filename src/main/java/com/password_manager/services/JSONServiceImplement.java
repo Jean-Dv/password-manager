@@ -62,4 +62,18 @@ public class JSONServiceImplement implements JSONService {
         }
         return true;
     }
+
+    @Override
+    public boolean saveObject(String key) {
+        JSONObject json = this.getObject();
+
+        json.remove(key);
+        try (PrintWriter out = new PrintWriter(new FileWriter(this.path))) {
+            out.println(json.toString());
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
+    }
 }
