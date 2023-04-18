@@ -8,27 +8,32 @@ import com.password_manager.services.JSONServiceImplement;
 
 public class VaultControllerImplement implements VaultController {
 
+    String username;
+    public VaultControllerImplement(String username) {
+        this.username = username;
+    }
+
     @Override
     public String getVault(String name) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
         return jsonService.getObject().getJSONObject(name).toString();
     }
 
     @Override
     public boolean addVault(String name, String username, String password, String url) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
         return jsonService.saveObject(name, new Vault(name, username, password, url));
     }
 
     @Override
     public boolean removeVault(String name) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
         return jsonService.saveObject(name);
     }
 
     @Override
     public boolean updateVault(String name, String username, String password, String url) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
         JSONObject obj = jsonService.getObject().getJSONObject(name);
         obj.put("username", username);
         obj.put("password", password);
