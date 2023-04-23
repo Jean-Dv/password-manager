@@ -15,25 +15,25 @@ public class VaultControllerImplement implements VaultController {
 
     @Override
     public String getVault(String name) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vault.json");
         return jsonService.getObject().getJSONObject(name).toString();
     }
 
     @Override
     public boolean addVault(String name, String username, String password, String url) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vault.json");
         return jsonService.saveObject(name, new Vault(name, username, password, url));
     }
 
     @Override
     public boolean removeVault(String name) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vault.json");
         return jsonService.saveObject(name);
     }
 
     @Override
     public boolean updateVault(String name, String username, String password, String url) {
-        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vaults.json");
+        JSONServiceImplement jsonService = new JSONServiceImplement("./db/" + this.username + "/vault.json");
         JSONObject obj = jsonService.getObject().getJSONObject(name);
         obj.put("username", username);
         obj.put("password", password);
