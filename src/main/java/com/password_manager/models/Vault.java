@@ -54,4 +54,10 @@ public class Vault extends JSONObject {
         this.url = url;
         this.put("url", this.url);
     }
+
+    @Override
+    public String toString() {
+        return "[*] Name: " + this.name + "\n[*] Username: " + this.username + "\n[*] Password: " + this.password
+                + "\n[*] URL: " + this.url + "\n";
+    }
 }
