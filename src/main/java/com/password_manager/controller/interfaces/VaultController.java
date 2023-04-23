@@ -1,15 +1,21 @@
 package com.password_manager.controller.interfaces;
 
+import org.json.JSONObject;
+
+import com.password_manager.models.Vault;
+
 public interface VaultController {
     /**
      * Get a vault from the file.
+     * 
      * @param name
      * @return
      */
-    String getVault(String name);
+    JSONObject getVault(String name);
 
     /**
      * Add a new vault to the file.
+     * 
      * @param name
      * @param username
      * @param password
@@ -20,6 +26,7 @@ public interface VaultController {
 
     /**
      * Remove a vault from the file.
+     * 
      * @param name
      * @return
      */
@@ -27,12 +34,11 @@ public interface VaultController {
 
     /**
      * Update a vault on the file.
+     * 
+     * @param vault
      * @param name
-     * @param username
-     * @param password
-     * @param url
      * @return
      */
-    boolean updateVault(String name, String username, String password, String url);
+    boolean updateVault(Vault vault, String name);
 
 }
