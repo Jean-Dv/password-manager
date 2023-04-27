@@ -139,39 +139,41 @@ public class App {
         if (isAuthenticated) {
             clearConsole();
             System.out.println("[*] Welcome back " + username);
-            System.out.println("[*] 1. Add a new vault");
-            System.out.println("[*] 2. Get a vault");
-            System.out.println("[*] 3. Remove a vault");
-            System.out.println("[*] 4. Update a vault");
-            System.out.println("[*] 5. Generate password secure");
-            System.out.println("[*] Please enter your choice: ");
-            byte choice = sc.nextByte();
-            sc.nextLine();
-            switch (choice) {
-                case 1:
-                    addNewVaultMenu(sc, username);
-                    break;
-                case 2:
-                    getVaultMenu(sc, username);
-                    break;
-                case 3:
-                    deleteVaultMenu(sc, username);
-                    break;
-                case 4:
-                    updateVaultMenu(sc, username);
-                    break;
-                case 5:
-                    createPasswordSecure(sc);
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("[*] Invalid choice!");
-                    break;
+            while (true) {
+                System.out.println("[*] 1. Add a new vault");
+                System.out.println("[*] 2. Get a vault");
+                System.out.println("[*] 3. Remove a vault");
+                System.out.println("[*] 4. Update a vault");
+                System.out.println("[*] 5. Generate password secure");
+                System.out.println("[*] 6. Exit");
+                System.out.println("[*] Please enter your choice: ");
+                byte choice = sc.nextByte();
+                sc.nextLine();
+                switch (choice) {
+                    case 1:
+                        addNewVaultMenu(sc, username);
+                        break;
+                    case 2:
+                        getVaultMenu(sc, username);
+                        break;
+                    case 3:
+                        deleteVaultMenu(sc, username);
+                        break;
+                    case 4:
+                        updateVaultMenu(sc, username);
+                        break;
+                    case 5:
+                        createPasswordSecure(sc);
+                        break;
+                    case 6:
+                        System.exit(0);
+                        break;
+                    default:
+                        System.out.println("[*] Invalid choice!");
+                        break;
+                }
             }
+
         }
         sc.close();
     }
