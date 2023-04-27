@@ -2,8 +2,10 @@ package com.password_manager;
 
 import java.util.Scanner;
 
+import com.password_manager.controller.SecurePasswordImplement;
 import com.password_manager.controller.UserControllerImplement;
 import com.password_manager.controller.VaultControllerImplement;
+import com.password_manager.models.SecurePassword;
 import com.password_manager.models.Vault;
 
 /**
@@ -92,6 +94,39 @@ public class App {
         vaultController.updateVault(vault, vaultName);
     }
 
+    public static void createPasswordSecure(Scanner sc) {
+        SecurePasswordImplement securePasswordController = new SecurePasswordImplement();
+        boolean hasNumbers = false;
+        boolean hasSymbols = false;
+        boolean hasUppercase = false;
+        boolean hasLowercase = false;
+        System.out.println("[*] Please enter the number of digits: ");
+        int length = sc.nextInt();
+        sc.nextLine();
+        System.out.println("[*] Please enter y/n if your want numbers: ");
+        String numbers = sc.nextLine();
+        if (numbers.equals("y")) {
+            hasNumbers = true;
+        }
+        System.out.println("[*] Please enter y/n if your want special characters: ");
+        String symbols = sc.nextLine();
+        if (symbols.equals("y")) {
+            hasSymbols = true;
+        }
+        System.out.println("[*] Please enter y/n if your want uppercase characters: ");
+        String uppercaseCharacters = sc.nextLine();
+        if (uppercaseCharacters.equals("y")) {
+            hasUppercase = true;
+        }
+        System.out.println("[*] Please enter y/n if your want lowercase characters: ");
+        String lowercaseCharacters = sc.nextLine();
+        if (lowercaseCharacters.equals("y")) {
+            hasLowercase = true;
+        }
+        SecurePassword securePassword = new SecurePassword(length, hasNumbers, hasSymbols, hasUppercase, hasLowercase);
+        System.out.println("[*] Your password is: " + securePasswordController.generatePassword(securePassword));
+    }
+
     public static void main(String[] args) {
         UserControllerImplement userController = new UserControllerImplement();
         Scanner sc = new Scanner(System.in);
@@ -108,6 +143,7 @@ public class App {
             System.out.println("[*] 2. Get a vault");
             System.out.println("[*] 3. Remove a vault");
             System.out.println("[*] 4. Update a vault");
+            System.out.println("[*] 5. Generate password secure");
             System.out.println("[*] Please enter your choice: ");
             byte choice = sc.nextByte();
             sc.nextLine();
@@ -125,6 +161,7 @@ public class App {
                     updateVaultMenu(sc, username);
                     break;
                 case 5:
+                    createPasswordSecure(sc);
                     break;
                 case 6:
                     break;
